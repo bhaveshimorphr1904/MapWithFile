@@ -12,8 +12,16 @@ nm = list(data["NAME"])
 
 fg = folium.FeatureGroup("My Map")
 
+# Used for simple popup info
+
+# for lt, lg, nm in zip(lat, lon, nm):
+#     fg.add_child(folium.Marker(location=[lt, lg], popup=nm, icon=folium.Icon(color="green")))
+
+# Used for html popup
 for lt, lg, nm in zip(lat, lon, nm):
-    fg.add_child(folium.Marker(location=[lt, lg], popup=nm, icon=folium.Icon(color="green")))
+    iframe = folium.IFrame(html=html % (nm, nm), width=200, height=100)
+    fg.add_child(folium.Marker(location=[lt, lg], popup=folium.Popup(
+        iframe), icon=folium.Icon(color="green")))
 
 map.add_child(fg)
 
