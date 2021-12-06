@@ -2,13 +2,16 @@ from typing import List
 import folium
 import pandas
 
-map = folium.Map(location=[23.032179330323753, 72.44560476930867], zoom_start=6)
+map = folium.Map(location=[23.032179330323753,
+                 72.44560476930867], zoom_start=6)
 
 data = pandas.read_csv("india.txt")
 
 lat = list(data["LAT"])
 lon = list(data["LON"])
 nm = list(data["NAME"])
+html = """Location name:<br><a href="https://www.google.com/search?q=%%22%s%%22" target="_blank">%s</a>"""
+
 
 fg = folium.FeatureGroup("My Map")
 
@@ -25,4 +28,4 @@ for lt, lg, nm in zip(lat, lon, nm):
 
 map.add_child(fg)
 
-map.save("map1.html")
+map.save("mymap.html")
